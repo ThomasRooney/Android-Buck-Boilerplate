@@ -12,22 +12,24 @@ Buck is especially good at handling applications which highly rely on native com
 
 # Getting started
 
-To get started, you need `ant`, which is required to build `buck`. Once that's done, run this sequence of commands to download the three dependencies
+To get started, you need `ant`, which is required to build `buck`. Once that's done, run the following sequence of commands to download the three dependencies.
+
+If you're not using the `ndk`, you don't have to run the `./scripts/get-android-ndk.sh` shell script.
 
 	./scripts/get-buck.sh
 	./scripts/get-android-sdk.sh
 	./scripts/get-android-ndk.sh
 
-Then, running this command configures for android-16 and android-8. Have a look at this file to change it for your target
-Please note, this accepts all the android sdk licences, so it's rather recommended to have a look at what you're agreeing to.
+Then, running this command configures the sdk for android-16 and android-8. Have a look at this file to change it for your target
+Please note, this accepts all the android sdk licences, so it's rather recommended to have a look at what you're agreeing to. Also, it is recommended that this script is run twice, as for some reason not all the dependencies are always downloaded on single run.
 
 	./scripts/configure-sdk.sh 
 
-The local.properties file in the root directory must also be updated with absoloute paths, so running this script generates that
+There must be a local.properties file in the root directory that has absoloute paths to the dependencies, so running this script generates that for you.
 
 	./scripts/configure-local.sh
 
-At this point, `buck` and the android ndk and sdk are fully set up for your system.
+At this point, `buck` and the android sdk/ndk are fully set up for your system.
 
 Running this next command produces keys used to sign the .apk, so it can be installed on a device.
 
@@ -38,8 +40,6 @@ This command is also wrapped with
 
 	./scripts/build.sh
 
-There are additional bash scripts to aid installing this on a device or emulator.
-
 Once the build has completed successfully, the apk is deposited as:
 
 	./buck-out/gen/apps/example/app.apk
@@ -48,9 +48,11 @@ Once the build has completed successfully, the apk is deposited as:
 
 Create and start an emulator with
 
-	./scripts/create_emulator.sh # only run this once
+	./scripts/create_emulator.sh
 	./scripts/start_emulator.sh
 
-Then the application can be installed on the emulator (or device, should there be one attached that can be found with `adb devices` and no emulator running ) via the command
+The emulator is persistant, so you should don't need to create it again. Just start it for each use.
+
+The application can then be installed on the emulator (or device, should there be one attached that can be found with `adb devices` and no emulator running ) via the command
 
 	/scripts/install.sh
