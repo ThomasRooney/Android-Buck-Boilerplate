@@ -10,6 +10,8 @@ This has been tested and configured for both Mac and Linux.
 
 Buck is especially good at handling applications which highly rely on native components, which I've personally found to be a major source of pain when working with IDEs like Eclipse and the Android Studio.
 
+# Instructions
+
 To get started, you need `ant`, which is required to build `buck`. Once that's done, run this sequence of commands to download the three dependencies
 
 	./scripts/get-buck.sh
@@ -23,7 +25,7 @@ Please note, this accepts all the android sdk licences, so it's rather recommend
 The local.properties file in the root directory must also be updated with absoloute paths, so running this script generates that
 	./scripts/configure-local.sh
 
-At this point, `buck`, the `ndk` and `sdk` are fully set up for your system.
+At this point, `buck` and the android ndk and sdk are fully set up for your system.
 
 Running this next command produces keys used to sign the .apk, so it can be installed on a device.
 	./scripts/regen-keys.sh
