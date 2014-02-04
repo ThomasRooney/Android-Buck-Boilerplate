@@ -1,0 +1,12 @@
+android_resource(
+  name = 'res',
+  res = 'res',
+  package = 'com.buck.example',
+  visibility = [
+    'PUBLIC'
+  ],
+)
+
+project_config(
+  src_target = ':res',
+)

@@ -1,0 +1,1 @@
+android create avd -n TestDevice
