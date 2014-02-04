@@ -10,7 +10,7 @@ This has been tested and configured for both Mac and Linux.
 
 Buck is especially good at handling applications which highly rely on native components, which I've personally found to be a major source of pain when working with IDEs like Eclipse and the Android Studio.
 
-# Instructions
+# Getting started
 
 To get started, you need `ant`, which is required to build `buck`. Once that's done, run this sequence of commands to download the three dependencies
 
@@ -39,3 +39,18 @@ This command is also wrapped with
 	./scripts/build.sh
 
 There are additional bash scripts to aid installing this on a device or emulator.
+
+Once the build has completed successfully, the apk is deposited as:
+
+	./buck-out/gen/apps/example/app.apk
+
+# Testing the application
+
+Create and start an emulator with
+
+	./scripts/create_emulator.sh # only run this once
+	./scripts/start_emulator.sh
+
+Then the application can be installed on the emulator (or device, should there be one attached that can be found with `adb devices` and no emulator running ) via the command
+
+	/scripts/install.sh
