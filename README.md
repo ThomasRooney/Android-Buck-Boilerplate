@@ -20,16 +20,22 @@ To get started, you need `ant`, which is required to build `buck`. Once that's d
 
 Then, running this command configures for android-16 and android-8. Have a look at this file to change it for your target
 Please note, this accepts all the android sdk licences, so it's rather recommended to have a look at what you're agreeing to.
+
 	./scripts/configure-sdk.sh 
 
 The local.properties file in the root directory must also be updated with absoloute paths, so running this script generates that
+
 	./scripts/configure-local.sh
 
 At this point, `buck` and the android ndk and sdk are fully set up for your system.
 
 Running this next command produces keys used to sign the .apk, so it can be installed on a device.
+
 	./scripts/regen-keys.sh
 
 Finally, at this point you should be able to build the Android application with `buck build app` in the root directory of this project. 
 This command is also wrapped with
+
 	./scripts/build.sh
+
+There are additional bash scripts to aid installing this on a device or emulator.
