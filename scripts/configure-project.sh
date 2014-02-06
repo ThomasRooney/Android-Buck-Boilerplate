@@ -109,11 +109,11 @@ pause "dirpackage: ${dirpackage}"
 	echo ")" >> BUCK
 	
 	cat MainActivity.java | tail -n +2 | > MainActivity.java
-	echo 'package #{package};' | cat - MainActivity.java > MainActivity.java
-
-
-
-	sed -i 's/com.buck.example/${package}/g' *.txt
+	
+	echo $'package #{package};' >tmp
+	cat MainActivity.java >>tmp
+	rm MainActivity.java
+	mv tmp MainActivity.java
 
 	cd $DIR/../res
 	mkdir -p ${dirpackage}
