@@ -27,12 +27,6 @@ appname=$2
 
 dirpackage=${package//[\.]//}
 
-pause "package: ${package}"
-pause "appname: ${appname}"
-pause "dirpackage: ${dirpackage}"
-#replace "." with "/"
-#com/buck/example
-
 (
 	cd $DIR/../apps
 	mv example ${appname}
@@ -171,7 +165,7 @@ pause "dirpackage: ${dirpackage}"
 	echo " keytool -genkey -noprompt \\" >> regen_keys.sh
 	echo "  -keystore \$DIR/../apps/${appname}/debug.keystore \\" >> regen_keys.sh
 	echo "  -alias      ${appname} \\" >> regen_keys.sh
-	echo "  -dname \"\" \\" >> regen_keys.sh
+	echo "  -dname \"CN=CHANGEME, O=DEBUG USER, C=GB\" \\" >> regen_keys.sh
 	echo "  -storepass ${appname}password \\" >> regen_keys.sh
 	echo "  -keypass ${appname}password \\" >> regen_keys.sh
 	echo "  -keyalg RSA -keysize 2048 -validity 10000" >> regen_keys.sh
