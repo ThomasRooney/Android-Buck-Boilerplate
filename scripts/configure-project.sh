@@ -132,20 +132,20 @@ pause "dirpackage: ${dirpackage}"
 
 	echo " #!/usr/bin/env bash" >> build.sh
 	echo " " >> build.sh
-	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> build.sh
+	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> build.sh
 	echo " " >> build.sh
 	echo " (" >> build.sh
-	echo " 	cd $DIR/../" >> build.sh
+	echo " 	cd \$DIR/../" >> build.sh
 	echo " 	buck build apps/${appname}:app" >> build.sh
 	echo " )" >> build.sh
 	chmod +x build.sh
 
 	echo " #!/usr/bin/env bash" >> install.sh
 	echo " " >> install.sh
-	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> install.sh
+	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> install.sh
 	echo " " >> install.sh
 	echo " (" >> install.sh
-	echo " 	cd $DIR/../" >> install.sh
+	echo " 	cd \$DIR/../" >> install.sh
 	echo " 	buck install apps/${appname}:app" >> install.sh
 	echo " )" >> install.sh
 	echo " #!/usr/bin/env bash" >> install.sh
@@ -153,14 +153,14 @@ pause "dirpackage: ${dirpackage}"
 
 
 	echo " #!/usr/bin/env bash" >> regen_keys.sh
-	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> regen_keys.sh
+	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> regen_keys.sh
 	echo " " >> regen_keys.sh
-	echo " if [ -f $DIR/../apps/${appname}/debug.keystore ] ; then" >> regen_keys.sh
-	echo "   rm $DIR/../apps/${appname}/debug.keystore" >> regen_keys.sh
+	echo " if [ -f \$DIR/../apps/${appname}/debug.keystore ] ; then" >> regen_keys.sh
+	echo "   rm \$DIR/../apps/${appname}/debug.keystore" >> regen_keys.sh
 	echo " fi" >> regen_keys.sh
 	echo " " >> regen_keys.sh
 	echo " keytool -genkey -noprompt \\" >> regen_keys.sh
-	echo "  -keystore $DIR/../apps/${appname}/debug.keystore \\" >> regen_keys.sh
+	echo "  -keystore \$DIR/../apps/${appname}/debug.keystore \\" >> regen_keys.sh
 	echo "  -alias      ${appname} \\" >> regen_keys.sh
 	echo "  -dname \"\" \\" >> regen_keys.sh
 	echo "  -storepass ${appname}password \\" >> regen_keys.sh
