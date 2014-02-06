@@ -148,7 +148,6 @@ pause "dirpackage: ${dirpackage}"
 	echo " 	cd \$DIR/../" >> install.sh
 	echo " 	buck install apps/${appname}:app" >> install.sh
 	echo " )" >> install.sh
-	echo " #!/usr/bin/env bash" >> install.sh
 	chmod +x install.sh
 
 
