@@ -175,5 +175,5 @@ pause "dirpackage: ${dirpackage}"
 
 
 
-	./regen_keys
+	$DIR/regen_keys.sh
 )
