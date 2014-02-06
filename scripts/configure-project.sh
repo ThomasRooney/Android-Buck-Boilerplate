@@ -110,7 +110,7 @@ pause "dirpackage: ${dirpackage}"
 	
 	cat MainActivity.java | tail -n +2 | > MainActivity.java
 
-	echo $'package ${package};' >tmp
+	echo "package ${package};" >tmp
 	cat MainActivity.java >>tmp
 	rm MainActivity.java
 	mv tmp MainActivity.java
