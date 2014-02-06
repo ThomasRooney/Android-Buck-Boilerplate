@@ -10,9 +10,9 @@ function pause(){
 }
 
 if [ $# -lt 2 ] ; then
-	echo "usage ./configure-project <package> <appname>"
+	echo "usage ./configure-project.sh <package> <appname>"
 	echo "  for example:"
-	echo "    ./configure-project \"com.buck.example\" \"buckexample\" "
+	echo "    ./configure-project.sh \"com.buck.example\" \"buckexample\" "
 	echo "  This command resets all files/directories to a new state with the given parameters"
 	exit
 fi

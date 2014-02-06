@@ -12,6 +12,8 @@ Buck is especially good at handling applications which highly rely on native com
 
 # Getting started
 
+If you already have buck and the android sdk, and your `ANDROID_SDK` environment variable set, skip to "Building the application".
+
 To get started, you need `ant`, which is required to build `buck`. Once that's done, run the following sequence of commands to download the three dependencies.
 
 If you're not using the `ndk`, you don't have to run the `./scripts/get-android-ndk.sh` shell script.
@@ -29,14 +31,17 @@ There must be a local.properties file in the root directory that has absoloute p
 
 	./scripts/configure-local.sh
 
+
 At this point, `buck` and the android sdk/ndk are fully set up for your system.
 
 Running this next command produces keys used to sign the .apk, so it can be installed on a device.
 
 	./scripts/regen-keys.sh
 
+# Building the application
+
 Finally, at this point you should be able to build the Android application with `buck build app` in the root directory of this project. 
-This command is also wrapped with
+This command is also wrapped with the following script
 
 	./scripts/build.sh
 
@@ -56,3 +61,31 @@ The emulator is persistant, so you should don't need to create it again. Just st
 The application can then be installed on the emulator (or device, should there be one attached that can be found with `adb devices` and no emulator running ) via the command
 
 	/scripts/install.sh
+
+# Using this as boilerplate
+
+If you're planning to actually use this as boilerplate, rather than just testing, you might want to have a look at this script
+
+	$ ./scripts/configure-project.sh 
+	usage ./configure-project.sh <package> <appname>
+	  for example:
+	    ./configure-project.sh "com.buck.example" "buckexample" 
+	  This command resets all files/directories to a new state with the given parameters
+
+What this will do is put the project into an initial, working (hopefully) state for a given package and application. It will rewrite configuration files and scripts as needed.
+
+A common workflow, to begin a new Android application, could be something along the lines of:
+
+	echo "This uses git archive to get a snapshot of this project"
+	./scripts/archive.sh
+	mkdir -p ~/Code/MY_ANDROID_PROJECT
+	mv android-example-src.tar.gz ~/Code/MY_ANDROID_PROJECT
+	cd ~/Code/MY_ANDROID_PROJECT
+	tar -xf android-example-src.tar.gz
+	rm android-example-src.tar.gz
+	./scripts/configure-project.sh com.hello.world helloworld
+	./scripts/build.sh
+
+
+
+
