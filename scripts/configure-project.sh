@@ -116,15 +116,18 @@ pause "dirpackage: ${dirpackage}"
 	rmdir com/buck/
 	rmdir com
 	cd ${dirpackage}
-	echo "android_library(" >> BUCK
-	echo "  name = 'activity'," >> BUCK
-	echo "  srcs = glob(['*.java'])," >> BUCK
-	echo "  deps = ['//res/${dirpackage}:res']," >> BUCK
-	echo "  visibility = [ 'PUBLIC' ]," >> BUCK
+
+	echo "android_resource(" >> BUCK
+	echo "  name = 'res'," >> BUCK
+	echo "  res = 'res'," >> BUCK
+	echo "  package = '${package}'," >> BUCK
+	echo "  visibility = [" >> BUCK
+	echo "    'PUBLIC'" >> BUCK
+	echo "  ]," >> BUCK
 	echo ")" >> BUCK
 	echo "" >> BUCK
 	echo "project_config(" >> BUCK
-	echo "  src_target = ':activity'," >> BUCK
+	echo "  src_target = ':res'," >> BUCK
 	echo ")" >> BUCK
 
 	cd $DIR
