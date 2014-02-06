@@ -2,10 +2,8 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-# Arguments
 
-
-# ./configure-project.sh packagename appname
+# Quick and hacky generator to get started on new projects fast
 
 function pause(){
    read -p "$*"
@@ -130,37 +128,39 @@ pause "dirpackage: ${dirpackage}"
 	echo ")" >> BUCK
 
 	cd $DIR
-	rm -f build.sh install.sh regen_keys.sh
+	rm -f build.sh install.sh regen_keys.sh archive.sh
 
 	echo " #!/usr/bin/env bash" >> build.sh
 	echo " " >> build.sh
-	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> build.sh
+	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> build.sh
 	echo " " >> build.sh
 	echo " (" >> build.sh
-	echo " 	cd \$DIR/../" >> build.sh
+	echo " 	cd $DIR/../" >> build.sh
 	echo " 	buck build apps/${appname}:app" >> build.sh
 	echo " )" >> build.sh
 	chmod +x build.sh
 
 	echo " #!/usr/bin/env bash" >> install.sh
 	echo " " >> install.sh
-	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> install.sh
+	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> install.sh
 	echo " " >> install.sh
 	echo " (" >> install.sh
-	echo " 	cd \$DIR/../" >> install.sh
+	echo " 	cd $DIR/../" >> install.sh
 	echo " 	buck install apps/${appname}:app" >> install.sh
 	echo " )" >> install.sh
 	echo " #!/usr/bin/env bash" >> install.sh
 	chmod +x install.sh
 
-	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> regen_keys.sh
+
+	echo " #!/usr/bin/env bash" >> regen_keys.sh
+	echo " DIR=\"$( cd \"$( dirname \"$0\" )\" && pwd )\"" >> regen_keys.sh
 	echo " " >> regen_keys.sh
-	echo " if [ -f \$DIR/../apps/${appname}/debug.keystore ] ; then" >> regen_keys.sh
-	echo "   rm \$DIR/../apps/${appname}/debug.keystore" >> regen_keys.sh
+	echo " if [ -f $DIR/../apps/${appname}/debug.keystore ] ; then" >> regen_keys.sh
+	echo "   rm $DIR/../apps/${appname}/debug.keystore" >> regen_keys.sh
 	echo " fi" >> regen_keys.sh
 	echo " " >> regen_keys.sh
 	echo " keytool -genkey -noprompt \\" >> regen_keys.sh
-	echo "  -keystore \$DIR/../apps/${appname}/debug.keystore \\" >> regen_keys.sh
+	echo "  -keystore $DIR/../apps/${appname}/debug.keystore \\" >> regen_keys.sh
 	echo "  -alias      ${appname} \\" >> regen_keys.sh
 	echo "  -dname \"\" \\" >> regen_keys.sh
 	echo "  -storepass ${appname}password \\" >> regen_keys.sh
@@ -168,4 +168,12 @@ pause "dirpackage: ${dirpackage}"
 	echo "  -keyalg RSA -keysize 2048 -validity 10000" >> regen_keys.sh
 	chmod +x regen_keys.sh
 
+	echo " #!/usr/bin/env bash" >> archive.sh
+	echo " DIR=\"\$( cd \"\$( dirname \"\$0\" )\" && pwd )\"" >> archive.sh
+	echo "(cd \$DIR/.. ; git archive --format tar.gz HEAD > android-${appname}-src.tar.gz)" >> archive.sh
+	chmod +x archive.sh
+
+
+
+	./regen_keys
 )

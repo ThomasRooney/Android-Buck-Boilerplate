@@ -1,3 +1,4 @@
+*.tar.gz
 local.properties
 dependencies
 buck-out
