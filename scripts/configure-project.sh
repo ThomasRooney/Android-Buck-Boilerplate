@@ -74,7 +74,7 @@ pause "dirpackage: ${dirpackage}"
 	echo "  keystore = ':debug_keystore'," >> BUCK
 	echo "  deps = [" >> BUCK
 	echo "    '//java/${dirpackage}:activity'," >> BUCK
-	echo "    '//res/{dirpackage}:res'," >> BUCK
+	echo "    '//res/${dirpackage}:res'," >> BUCK
 	echo "  ]," >> BUCK
 	echo ")" >> BUCK
 	echo "" >> BUCK
