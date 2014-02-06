@@ -173,6 +173,9 @@ pause "dirpackage: ${dirpackage}"
 	echo "(cd \$DIR/.. ; git archive --format tar.gz HEAD > android-${appname}-src.tar.gz)" >> archive.sh
 	chmod +x archive.sh
 
+	rm -f $DIR/../.buckconfig
+	echo "[alias]" >> $DIR/../.buckconfig
+    echo "   app = //apps/${appname}:app" >> $DIR/../.buckconfig
 
 
 	$DIR/regen_keys.sh
