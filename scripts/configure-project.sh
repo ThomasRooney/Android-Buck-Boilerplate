@@ -60,9 +60,9 @@ pause "dirpackage: ${dirpackage}"
 	echo "</manifest>" >> AndroidManifest.xml
 
 	rm -f debug.keystore.properties
-	echo "key.alias=${appname}" > debug.keystore.properties
-	echo "key.store.password=${appname}password" > debug.keystore.properties
-	echo "key.alias.password=${appname}password" > debug.keystore.properties
+	echo "key.alias=${appname}" >> debug.keystore.properties
+	echo "key.store.password=${appname}password" >> debug.keystore.properties
+	echo "key.alias.password=${appname}password" >> debug.keystore.properties
 
 	rm -f debug.keystore
 	rm -f BUCK
