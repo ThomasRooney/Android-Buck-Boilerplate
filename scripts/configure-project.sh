@@ -107,6 +107,13 @@ pause "dirpackage: ${dirpackage}"
 	echo "project_config(" >> BUCK
 	echo "  src_target = ':activity'," >> BUCK
 	echo ")" >> BUCK
+	
+	cat MainActivity.java | tail -n +2 | > MainActivity.java
+	echo 'package #{package};' | cat - MainActivity.java > MainActivity.java
+
+
+
+	sed -i 's/com.buck.example/${package}/g' *.txt
 
 	cd $DIR/../res
 	mkdir -p ${dirpackage}
